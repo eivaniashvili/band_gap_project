@@ -101,6 +101,53 @@ def fig_oxygen_violin(df: pd.DataFrame, fname: str = "fig3_oxygen_violin.png"):
     plt.savefig(SLIDES / fname, dpi=200)
     plt.show()
 
+def fig_oxygen_violin_log(
+    df: pd.DataFrame,
+    fname: str = "fig3_oxygen_violin_logtransform.png",
+    eps: float = 1e-3
+):
+    """
+    Plot *log-transformed* band gaps for O-containing vs O-free compounds.
+    We plot y = log10(band_gap_eV + eps) on a *linear* axis (no log scale on the axis).
+    This avoids issues with zeros while directly visualizing orders of magnitude.
+
+    Parameters
+    ----------
+    df : DataFrame with columns ["structure", "band_gap_eV"]
+    fname : output filename (saved to SLIDES/)
+    eps : small positive constant added before log10 to handle zeros
+    """
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    def has_O(struct):
+        return any(el.symbol == "O" for el in struct.composition.elements)
+
+    t = df[["structure", "band_gap_eV"]].copy()
+    t["has_O"] = t["structure"].apply(has_O)
+
+    y_O_raw   = t.loc[t["has_O"],  "band_gap_eV"].to_numpy(dtype=float)
+    y_noO_raw = t.loc[~t["has_O"], "band_gap_eV"].to_numpy(dtype=float)
+
+    # Log-transform the values (base-10). Add eps to handle zeros.
+    y_O   = np.log10(y_O_raw + eps)
+    y_noO = np.log10(y_noO_raw + eps)
+
+    plt.figure(figsize=(7, 5))
+    plt.violinplot([y_O, y_noO], showmeans=True, showextrema=True, showmedians=True)
+    plt.xticks([1, 2], ["Contains O", "No O"])
+    plt.ylabel(r"$\log_{10}(\mathrm{band\ gap}\ [\mathrm{eV}] + \epsilon)$")
+    plt.title("Effect of Oxygen on Band Gap (log-transformed)")
+
+    y_all = np.concatenate([y_O, y_noO])
+    y_lo, y_hi = np.percentile(y_all, [0.5, 99.5])
+    plt.ylim(y_lo, y_hi)
+
+    plt.tight_layout()
+    plt.savefig(SLIDES / fname, dpi=200)
+    plt.show()
+
+
 def fig_bandgap_summary(df, fname="fig0_bandgap_summary.png", save=True):
     """Compact panel with histogram + pie chart summarizing dataset."""
     import matplotlib.pyplot as plt
