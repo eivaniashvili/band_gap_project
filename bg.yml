@@ -1,0 +1,29 @@
+name: bandgap
+channels:
+  - conda-forge
+dependencies:
+  - python = 3.12.10
+  - numpy = 2.2.5
+  - matplotlib = 3.10.1
+  - seaborn = 0.13.2
+  - pandas = 2.2.3
+  - polars = 1.27.1
+  - scikit-learn = 1.6.1
+  - py-xgboost = 3.0.0
+  - shap = 0.47.2
+  - jupyter
+
+  - jupyterlab              
+  - ipykernel               
+  - scipy                  
+  - joblib             
+  - requests          
+  - tqdm                       
+
+  # Materials / featurization stack
+  - pymatgen                   # structures, compositions
+  - spglib                     # symmetry (pymatgen helper)
+  - monty                      # pymatgen helper utils
+  - matminer                   # ElementFraction, Magpie features
+
+prefix: /opt/conda
