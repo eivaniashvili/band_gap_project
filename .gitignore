@@ -1,19 +1,38 @@
+# OS / editor cruft
 .DS_Store
 .ipynb_checkpoints/
 .vscode/
 __pycache__/
 *.pyc
+
+# Environments / packaging
 .env
 .venv/
-*.egg-info/
-artifacts/
-data/*.pkl
-data/*.parquet
-data/*.json.gz
-data/*.npy
-*.npy
-*.npz
-*.joblib
-slides/*.png
-results/*.csv
-results/*.json
+*.egg-info
+
+
+# ==== DATA ====
+
+# Raw + external data (never commit full datasets)
+data/raw/
+data/external/
+
+# Heavy intermediate featureს
+data/interim/features_full.pkl
+data/interim/features_parts/
+data/interim/raw_df.pkl
+
+# Structured JSON exports of the full dataset 
+data/interim/train_with_structure.json
+data/interim/val_with_structure.json
+data/interim/test_with_structure.json
+
+# Processed numeric arrays
+data/processed/*.npy
+data/processed/*.npz
+
+# models
+
+# Trained model binaries 
+models/*.joblib
+

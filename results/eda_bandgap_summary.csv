@@ -1,0 +1,13 @@
+Metric,Value
+Rows,106113
+Mean (eV),1.214626648007313
+Median (eV),0.27380000000000004
+Std (eV),1.5989657899093914
+Min (eV),0.0
+Max (eV),9.721200000000001
+Metals (<0.05 eV),45.83%
+Semiconductors (0.05–3 eV),37.90%
+Insulators (≥3 eV),16.27%
+Median # elements,3.0
+Mean # elements,3.3788508476812456
+Share with O,49.03%

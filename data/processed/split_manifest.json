@@ -1,0 +1,18 @@
+{
+  "n_features": 250,
+  "sizes": {
+    "train": 66403,
+    "val": 17545,
+    "test": 22165
+  },
+  "csv_files": [
+    "train.csv",
+    "val.csv",
+    "test.csv"
+  ],
+  "json_files": [
+    "train_with_structure.json",
+    "val_with_structure.json",
+    "test_with_structure.json"
+  ]
+}
